@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promoção Cacau Show</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Roboto', sans-serif; margin: 0; background: #fff8f2; color: #4e342e; }
+    header, footer { background: #4e342e; color: white; padding: 10px; text-align: center; }
+    main { padding: 20px; max-width: 600px; margin: auto; }
+    .etapas { display: flex; justify-content: space-between; margin-bottom: 20px; font-weight: bold; }
+    .etapas span { flex: 1; text-align: center; padding: 10px; border-radius: 5px; background: #d7ccc8; margin: 0 2px; }
+    .etapas .ativa { background: #8d6e63; color: white; }
+    .input-group { margin-bottom: 15px; }
+    input, select { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
+    .botao { display: inline-block; background: #8d6e63; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; cursor: pointer; margin-top: 20px; text-align: center; }
+    .produtos { display: flex; flex-direction: column; gap: 15px; }
+    .produto { border: 2px solid #ccc; padding: 10px; background: #fff; border-radius: 10px; cursor: pointer; text-align: center; }
+    .produto img { width: 100px; height: auto; }
+    .produto .preco-original { text-decoration: line-through; color: #a1887f; }
+    .produto .preco-final { color: green; font-weight: bold; }
+    .rodape-texto { font-size: 12px; margin-top: 10px; color: #d7ccc8; }
+    .resposta-opcao { display: flex; gap: 10px; margin-top: 5px; }
+    .resposta-opcao button { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background: #fff; cursor: pointer; }
+    .resposta-opcao button:hover { background: #eee; }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://www.cacaushow.com.br/on/demandware.static/Sites-CacauShow-Site/-/default/dwefbf6e3e/images/logo.svg" alt="Cacau Show Logo" style="height: 50px;">
+  </header>
+  <main>
+    <div class="etapas">
+      <span class="ativa">1. Pesquisa</span>
+      <span>2. Escolha</span>
+      <span>3. Dados</span>
+      <span>4. Envio</span>
+      <span>5. Confirmação</span>
+    </div>
+
+    <div id="pagina1">
+      <h1>🎉 Ganhe Chocolate Grátis da Cacau Show!</h1>
+      <p>🍫 Responda nossa pesquisa rápida e receba um delicioso chocolate na sua casa!</p>
+      <div class="input-group">
+        <label>Você gosta de chocolate?</label>
+        <div class="resposta-opcao">
+          <button>Sim</button><button>Não</button>
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Já comprou Cacau Show?</label>
+        <div class="resposta-opcao">
+          <button>Sim</button><button>Não</button>
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Você indicaria a marca?</label>
+        <div class="resposta-opcao">
+          <button>Sim</button><button>Não</button>
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Gostaria de receber um brinde exclusivo?</label>
+        <div class="resposta-opcao">
+          <button>Sim</button><button>Não</button>
+        </div>
+      </div>
+      <div class="botao" onclick="mostrarEtapa(2)">👉 Avançar</div>
+    </div>
+
+    <div id="pagina2" style="display:none;">
+      <h2>Escolha seu chocolate:</h2>
+      <div class="produtos">
+        <div class="produto" onclick="selecionarProduto(this)">
+          <img src="https://via.placeholder.com/100" alt="Chef Pistache">
+          <div>Ovo do Chef Pistache 600g<br><span class="preco-original">R$ 199,99</span> → <span class="preco-final">R$ 0,00</span></div>
+        </div>
+        <div class="produto" onclick="selecionarProduto(this)">
+          <img src="https://via.placeholder.com/100" alt="Clássicos ao Leite">
+          <div>Clássicos ao Leite 2kg<br><span class="preco-original">R$ 399,99</span> → <span class="preco-final">R$ 0,00</span></div>
+        </div>
+        <div class="produto" onclick="selecionarProduto(this)">
+          <img src="https://via.placeholder.com/100" alt="Chef Nuts">
+          <div>Ovo do Chef Nuts 600g<br><span class="preco-original">R$ 174,99</span> → <span class="preco-final">R$ 0,00</span></div>
+        </div>
+        <div class="produto" onclick="selecionarProduto(this)">
+          <img src="https://via.placeholder.com/100" alt="Pantufa Ursinha">
+          <div>Pantufa Ursinha 170g<br><span class="preco-original">R$ 118,89</span> → <span class="preco-final">R$ 0,00</span></div>
+        </div>
+      </div>
+      <div id="campo-cep" style="display:none; margin-top:20px;">
+        <div class="input-group">
+          <label>Digite seu CEP:</label>
+          <input type="text" id="cep" placeholder="00000-000" onblur="buscarEndereco()">
+        </div>
+        <div class="input-group">
+          <label>Endereço:</label>
+          <input type="text" id="endereco" readonly>
+        </div>
+        <div class="botao" onclick="mostrarEtapa(3)">👉 Confirmar Endereço</div>
+        <div class="botao" onclick="mostrarEtapa(1)">🔙 Voltar</div>
+      </div>
+    </div>
+
+    <div id="pagina3" style="display:none;">
+      <h2>📝 Complete seus dados:</h2>
+      <div class="input-group">
+        <label>Nome completo:</label>
+        <input type="text">
+      </div>
+      <div class="input-group">
+        <label>CPF:</label>
+        <input type="text">
+      </div>
+      <div class="input-group">
+        <label>E-mail:</label>
+        <input type="email">
+      </div>
+      <div class="input-group">
+        <label>Número da residência:</label>
+        <input type="text">
+      </div>
+      <div class="input-group">
+        <label>Complemento:</label>
+        <input type="text">
+      </div>
+      <div class="botao" onclick="mostrarEtapa(4)">👉 Avançar para Escolher Envio</div>
+      <div class="botao" onclick="mostrarEtapa(2)">🔙 Voltar</div>
+    </div>
+
+    <div id="pagina4" style="display:none;">
+      <h2>🚚 Escolha o tipo de envio:</h2>
+      <div class="input-group">
+        <label><input type="radio" name="frete"> PAC — R$ 18,00 (3 a 7 dias úteis)</label><br>
+        <label><input type="radio" name="frete"> SEDEX — R$ 35,00 (1 a 3 dias úteis)</label>
+      </div>
+      <div class="botao" onclick="mostrarEtapa(5)">👉 Confirmar Envio</div>
+      <div class="botao" onclick="mostrarEtapa(3)">🔙 Voltar</div>
+    </div>
+
+    <div id="pagina5" style="display:none;">
+      <h2>🎉 Confirmação:</h2>
+      <p>Você escolheu seu produto e preenchendo seus dados. Em breve, você receberá um chocolate em casa!</p>
+      <div class="botao" onclick="window.location.reload();">🎉 Voltar ao Início</div>
+    </div>
+  </main>
+
+  <footer>
+    <p class="rodape-texto">Promoção válida enquanto durarem os estoques. Consulte regulamento completo no site.</p>
+  </footer>
+
+  <script>
+    let etapa = 1;
+
+    function mostrarEtapa(etapa) {
+      document.querySelector(`#pagina${this.etapa}`).style.display = 'none';
+      document.querySelector(`#pagina${etapa}`).style.display = 'block';
+      this.etapa = etapa;
+    }
+
+    function selecionarProduto(produto) {
+      const produtos = document.querySelectorAll('.produto');
+      produtos.forEach(p => p.style.border = '2px solid #ccc');
+      produto.style.border = '2px solid green';
+    }
+  </script>
+</body>
+</html>
